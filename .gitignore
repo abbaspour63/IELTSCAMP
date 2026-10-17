@@ -1,0 +1,111 @@
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+**/wp-config.php
+
+# WordPress user uploads and runtime files
+wordpress/uploads/
+wordpress/wp-content/uploads/
+wordpress/cache/
+wordpress/upgrade/
+
+# Dependencies
+**/node_modules/
+**/vendor/
+
+# IDE
+.idea/
+
+# Logs and temporary files
+*.log
+.DS_Store
+*.tmp
+
+# Database dumps and backups
+*.sql
+*.sql.gz
+*.zip
+*.tar
+*.tar.gz
+
+# Installed WordPress plugins
+wordpress/plugins/
+
+# Backup files
+*.bak
+*.before-new-hero
+
+# Local IDE settings
+.idea/
+
+# WordPress core
+wordpress/wp-admin/
+wordpress/wp-includes/
+wordpress/index.php
+wordpress/license.txt
+wordpress/readme.html
+wordpress/wp-*.php
+
+# Keep project-specific PHP configuration
+!wordpress/wp-config-sample.php
+
+# WordPress default plugins
+wordpress/plugins/
+
+# User uploads and generated content
+wordpress/uploads/
+wordpress/wp-content/uploads/
+wordpress/wp-content/cache/
+wordpress/wp-content/upgrade/
+# Ignore all default WordPress themes
+wordpress/themes/twentytwentyfive/
+wordpress/themes/twentytwentyfour/
+wordpress/themes/twentytwentythree/
+
+# Ignore themes directory index
+wordpress/themes/index.php
+
+# Theme backup and incomplete files
+*.before-append
+*.before-order-fix
+*.before-repair
+*.incomplete
+
+# Ignore WordPress installation files
+wordpress/*
+
+# Keep only the custom IELTS Academy theme
+!wordpress/themes/
+wordpress/themes/*
+!wordpress/themes/ielts-academy/
+!wordpress/themes/ielts-academy/**
+
+# Keep custom PHP upload configuration if present
+!wordpress/php/
+!wordpress/php/uploads.ini
+
+# Ignore local uploads and installed plugins
+wordpress/uploads/
+wordpress/plugins/
+
+# Ignore backups
+*.bak
+*.before-*
+*.incomplete
+
+# Editor temporary files
+*.swp
+*.swo
+*~
+
+# Backup files
+*.backup
+*.bak
+*.before-*
+
+
+
+# Generated test CSS
+**/test-output.css

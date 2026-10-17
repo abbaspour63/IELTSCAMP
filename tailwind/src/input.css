@@ -1,0 +1,201 @@
+@import "tailwindcss";
+
+@source "../../theme";
+
+@font-face {
+  font-family: "IRANSansWeb";
+  src: url("../fonts/IRANSansWeb.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-sans: "IRANSansWeb";
+}
+
+html,
+body,
+button,
+input,
+select,
+textarea {
+  font-family: "IRANSansWeb";
+}
+
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("../fonts/Vazirmatn[wght].woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+/* ========================================
+   IELTS Academy — Luxury Tech Palette
+   ======================================== */
+
+:root {
+  --luxury-gold: #D9D28B;
+  --luxury-charcoal: #46533C;
+  --luxury-grey: #8E9162;
+  --luxury-grey-cyan: #B2BD7E;
+  --luxury-cyan: #6A795D;
+
+  --luxury-bg: #F8F7EC;
+  --luxury-panel: #FFFFFF;
+  --luxury-silver: #293326;
+  --luxury-muted: #59634F;
+  --luxury-border: #D9D28B;
+}
+/* Main page */
+body.home main {
+  background-color: var(--luxury-bg) !important;
+  color: var(--luxury-silver);
+}
+
+/* Hero */
+body.home #hero {
+  background-color: var(--luxury-bg) !important;
+  background-image:
+          radial-gradient(
+                  ellipse at 15% 20%,
+                  rgb(0 229 255 / 10%),
+                  transparent 45%
+          ),
+          radial-gradient(
+                  ellipse at 85% 75%,
+                  rgb(139 92 246 / 13%),
+                  transparent 45%
+          ) !important;
+  border-color: var(--luxury-border) !important;
+}
+
+body.home #hero h1,
+body.home #hero h2,
+body.home #hero h3 {
+  color: var(--luxury-silver) !important;
+}
+
+body.home #hero p {
+  color: var(--luxury-muted) !important;
+}
+
+/* Main sections */
+body.home #academy-features,
+body.home main > section {
+  color: var(--luxury-silver);
+  border-color: var(--luxury-border);
+}
+
+/* Cards */
+body.home main article,
+body.home #hero .rounded-2xl {
+  background-color: var(--luxury-panel) !important;
+  border-color: var(--luxury-border) !important;
+  color: var(--luxury-silver);
+  box-shadow: 0 12px 35px rgb(0 0 0 / 18%);
+}
+
+/* Headings and descriptions */
+body.home main article h2,
+body.home main article h3,
+body.home main section h2,
+body.home main section h3 {
+  color: var(--luxury-silver) !important;
+}
+
+body.home main article p,
+body.home main section p {
+  color: var(--luxury-muted);
+}
+
+/* Links */
+body.home main a {
+  transition:
+          color 180ms ease,
+          border-color 180ms ease,
+          box-shadow 180ms ease;
+}
+
+body.home main a:hover {
+  color: var(--luxury-cyan);
+}
+
+/* Primary actions */
+body.home main a.bg-cyan-400,
+body.home main a.bg-cyan-500 {
+  background-color: var(--luxury-cyan) !important;
+  color: var(--luxury-bg) !important;
+  box-shadow: 0 0 22px rgb(0 229 255 / 12%);
+}
+
+body.home main a.bg-cyan-400:hover,
+body.home main a.bg-cyan-500:hover {
+  box-shadow: 0 0 28px rgb(0 229 255 / 28%);
+}
+
+/* CTA */
+body.home main section:last-of-type {
+  border-color: var(--luxury-border);
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  body.home main a {
+    transition: none;
+  }
+}
+/* Luxury Tech — IELTS Academy accents */
+
+body.home main a:hover {
+  color: var(--luxury-cyan);
+}
+
+body.home main a.bg-cyan-400,
+body.home main a.bg-cyan-500 {
+  background-color: var(--luxury-gold) !important;
+  color: #202020 !important;
+  box-shadow: 0 0 18px rgb(197 170 23 / 18%);
+}
+
+body.home main a.bg-cyan-400:hover,
+body.home main a.bg-cyan-500:hover {
+  background-color: var(--luxury-cyan) !important;
+  color: #202020 !important;
+  box-shadow: 0 0 24px rgb(20 221 238 / 25%);
+}
+
+body.home main a {
+  transition:
+          color 180ms ease,
+          background-color 180ms ease,
+          box-shadow 180ms ease;
+}
+
+body.home #hero {
+  background-image:
+          radial-gradient(
+                  ellipse at 15% 20%,
+                  rgb(20 221 238 / 9%),
+                  transparent 45%
+          ),
+          radial-gradient(
+                  ellipse at 85% 75%,
+                  rgb(197 170 23 / 8%),
+                  transparent 45%
+          ) !important;
+}
+
+body.home main article {
+  border-color: var(--luxury-border) !important;
+}
+
+body.home main article:hover {
+  border-color: var(--luxury-grey-cyan) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.home main a {
+    transition: none;
+  }
+}
