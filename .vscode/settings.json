@@ -1,0 +1,7 @@
+
+{
+    "intelephense.environment.includePaths": [
+        "wordpress"
+    ],
+    "intelephense.files.maxSize": 5000000
+}

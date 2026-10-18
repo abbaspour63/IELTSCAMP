@@ -156,6 +156,8 @@ add_action(
 require_once get_template_directory() . '/includes/auth.php';
 require_once get_template_directory() . '/includes/courses.php';
 require_once get_template_directory() . '/includes/consultations.php';
+require_once get_template_directory() . '/includes/course-sales.php';
+
 /**
  * Load IELTS Academy login JavaScript.
  */
