@@ -39,7 +39,30 @@ function ielts_academy_register_course_type() {
     ]);
 }
 
+/**
+ * دسته‌بندی دوره‌های IELTS
+ */
+add_action('init', 'ielts_academy_register_course_category');
 
+function ielts_academy_register_course_category() {
+    register_taxonomy('ielts_course_category', ['ielts_course'], [
+        'labels' => [
+            'name'          => 'دسته‌بندی دوره‌ها',
+            'singular_name' => 'دسته دوره',
+            'search_items'  => 'جستجوی دسته‌ها',
+            'all_items'     => 'همه دسته‌ها',
+            'edit_item'     => 'ویرایش دسته',
+            'add_new_item'  => 'افزودن دسته جدید',
+            'menu_name'     => 'دسته‌بندی دوره‌ها',
+        ],
+        'public'            => false,
+        'show_ui'           => true,
+        'show_admin_column' => true,
+        'show_in_rest'      => true,
+        'hierarchical'      => true,
+        'rewrite'           => false,
+    ]);
+}
 /**
  * نمایش فهرست دوره‌ها در صفحه ویرایش کاربر وردپرس
  */
