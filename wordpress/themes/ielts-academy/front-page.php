@@ -1,7 +1,7 @@
 
 <?php
 /**
- * Front Page - IELTS Academy
+ * Front Page - IELTSCAMP
  */
 
 get_header();
@@ -11,7 +11,7 @@ get_header();
 
 
 
-<!-- Hero: IELTS Academy -->
+<!-- Hero: IELTSCAMP -->
 
 
 <?php get_template_part('template-parts/hero');  ?>
@@ -138,7 +138,7 @@ get_header();
                برگزاری رویداد 
             </p>
 
-            <a href="<?php echo esc_url( home_url( '/my-account/' ) ); ?>"
+            <a href="<?php echo esc_url( home_url( '/events/' ) ); ?>"
                class="mt-8 inline-block rounded-xl bg-cyan-400 px-7 py-3 font-bold text-blue-950 transition hover:bg-cyan-300">
               ورود به ایونت 
             </a>

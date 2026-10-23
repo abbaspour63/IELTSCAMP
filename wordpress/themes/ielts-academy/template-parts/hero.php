@@ -1,6 +1,6 @@
 <?php
 /**
- * IELTS Academy - Hero Section
+ * IELTSCAMP - Hero Section
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

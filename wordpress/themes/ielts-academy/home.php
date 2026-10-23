@@ -13,7 +13,7 @@ get_header();
 
         <header class="mb-12 text-center">
             <p class="mb-3 text-sm font-semibold text-sky-400">
-                IELTS ACADEMY BLOG
+                IELTSCAMP BLOG
             </p>
 
             <h1 class="text-3xl font-extrabold sm:text-5xl">

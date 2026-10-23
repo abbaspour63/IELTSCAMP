@@ -540,6 +540,6 @@
             }, { once: true });
         })
         .catch(function (error) {
-            console.error('IELTS Academy 3D scene could not load:', error);
+            console.error('IELTSCAMP 3D scene could not load:', error);
         });
 })();

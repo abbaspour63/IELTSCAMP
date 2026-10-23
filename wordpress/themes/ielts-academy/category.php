@@ -1,7 +1,7 @@
 
 <?php
 /**
- * Category Archive - IELTS Academy
+ * Category Archive - IELTSCAMP
  */
 
 get_header();
@@ -18,7 +18,7 @@ $category_description = category_description();
         <header class="mb-12 text-center">
 
             <p class="mb-3 text-sm font-semibold uppercase tracking-widest text-sky-400">
-                IELTS ACADEMY BLOG
+                IELTSCAMP BLOG
             </p>
 
             <h1 class="text-3xl font-extrabold sm:text-5xl">

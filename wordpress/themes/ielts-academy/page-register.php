@@ -1,7 +1,6 @@
-
 <?php
 /**
- * Template Name: IELTS Academy Registration
+ * Template Name: IELTSCAMP Registration
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -23,7 +22,7 @@ $phone = '';
 if (
     'POST' === $_SERVER['REQUEST_METHOD']
     && isset( $_POST['ielts_register_submit'] )
-) {
+) 
     if (
         ! isset( $_POST['ielts_register_nonce'] )
         || ! wp_verify_nonce(
@@ -101,17 +100,28 @@ if (
 
             if ( is_wp_error( $user_id ) ) {
                 $errors[] = 'ساخت حساب انجام نشد. لطفاً دوباره تلاش کنید.';
-            } else {
-                if ( '' !== $phone ) {
-                    update_user_meta( $user_id, 'billing_phone', $phone );
-                }
+        
+    }else {
+    if ( '' !== $phone ) {
+        update_user_meta(
+            $user_id,
+            'billing_phone',
+            $phone
+        );
+    }
 
-                $success = true;
-            }
-        }
+    if ( ielts_academy_send_verification_email( $user_id ) ) {
+        $success = true;
+    } else {
+        // Email could not be queued by WordPress.
+        require_once ABSPATH . 'wp-admin/includes/user.php';
+        wp_delete_user( $user_id );
+
+        $errors[] = 'ارسال ایمیل تأیید انجام نشد. لطفاً تنظیمات ایمیل سایت را بررسی و دوباره تلاش کنید.';
     }
 }
-
+}
+    }
 get_header();
 
 ?>
@@ -124,19 +134,29 @@ get_header();
         </h1>
 
         <p class="mb-8 text-center text-sm text-slate-500">
-            برای استفاده از خدمات IELTS Academy ثبت‌نام کنید.
+            برای استفاده از خدمات IELTSCAMP ثبت‌نام کنید.
         </p>
 
         <?php if ( $success ) : ?>
 
             <div class="rounded-xl border border-green-200 bg-green-50 p-5 text-center text-green-800">
-                <p class="mb-3 font-bold">حساب شما با موفقیت ساخته شد.</p>
+                <!-- <p class="mb-3 font-bold">حساب شما با موفقیت ساخته شد.</p>
                 <p class="mb-5 text-sm">اکنون می‌توانید وارد حساب خود شوید.</p>
                 <a href="<?php echo esc_url( home_url( '/login/' ) ); ?>"
                    class="inline-block rounded-xl bg-blue-700 px-6 py-3 font-bold text-white hover:bg-blue-800">
                     ورود به حساب
                 </a>
-            </div>
+            </div> -->
+
+            <p class="mb-3 font-bold">
+    حساب شما ساخته شد؛ اما هنوز فعال نیست.
+</p>
+
+<p class="mb-5 text-sm">
+    لینک تأیید به ایمیل شما ارسال شد.
+    صندوق ورودی و پوشه هرزنامه را بررسی کنید.
+    پس از تأیید ایمیل می‌توانید وارد حساب شوید.
+</p>
 
         <?php else : ?>
 
@@ -221,4 +241,4 @@ get_header();
 </main>
 
 <?php get_footer(); ?>
-<?php
+<?php  ?>

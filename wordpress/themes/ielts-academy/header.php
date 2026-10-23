@@ -29,7 +29,7 @@
         src="<?php echo esc_url(
             get_theme_file_uri( './assets/images/logo.svg' )
         ); ?>"
-        alt="IELTS Academy"
+        alt="IELTSCAMP"
         class="h-12 w-auto max-w-45 object-contain"
     >
         </span>

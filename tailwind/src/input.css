@@ -31,7 +31,7 @@ textarea {
   font-display: swap;
 }
 /* ========================================
-   IELTS Academy — Luxury Tech Palette
+   IELTSCAMP — Luxury Tech Palette
    ======================================== */
 
 :root {
@@ -145,7 +145,7 @@ body.home main section:last-of-type {
     transition: none;
   }
 }
-/* Luxury Tech — IELTS Academy accents */
+/* Luxury Tech — IELTSCAMP accents */
 
 body.home main a:hover {
   color: var(--luxury-cyan);
@@ -198,4 +198,79 @@ body.home main article:hover {
   body.home main a {
     transition: none;
   }
+}
+
+
+
+/* IELTSCAMP Events */
+
+.ielts-event-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.ielts-event-card > a:first-child {
+    flex-shrink: 0;
+}
+
+.ielts-event-placeholder {
+    display: flex;
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    overflow: hidden;
+    padding: 24px;
+    background: linear-gradient(135deg, #082f49, #0f172a 60%, #0369a1);
+    color: #fff;
+    text-align: center;
+}
+
+.ielts-event-placeholder span {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    color: #7dd3fc;
+}
+
+.ielts-event-placeholder strong {
+    font-size: clamp(20px, 3vw, 30px);
+    font-weight: 900;
+    line-height: 1.5;
+}
+
+.ielts-events-eyebrow {
+    margin-bottom: 16px;
+    color: #7dd3fc;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+}
+
+.ielts-events-empty {
+    padding: 48px 24px;
+    border: 1px solid #e2e8f0;
+    border-radius: 24px;
+    background: #fff;
+    text-align: center;
+}
+
+.ielts-events-empty h2 {
+    margin-bottom: 12px;
+    font-size: 24px;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.ielts-events-empty p {
+    line-height: 2;
+    color: #64748b;
+}
+
+.ielts-events-pagination {
+    margin-top: 40px;
+    text-align: center;
 }

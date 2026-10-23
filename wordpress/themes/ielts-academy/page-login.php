@@ -9,7 +9,7 @@ get_header();
     <div class="mx-auto max-w-md rounded-2xl bg-white p-8 shadow-lg">
 
         <h1 class="mb-3 text-center text-2xl font-bold text-slate-800">
-            ورود به IELTS Academy
+            ورود به IELTSCAMP
         </h1>
 
         <p class="mb-8 text-center text-slate-500">

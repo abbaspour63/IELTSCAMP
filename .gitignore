@@ -76,7 +76,7 @@ wordpress/themes/index.php
 # Ignore WordPress installation files
 wordpress/*
 
-# Keep only the custom IELTS Academy theme
+# Keep only the custom IELTSCAMP theme
 !wordpress/themes/
 wordpress/themes/*
 !wordpress/themes/ielts-academy/

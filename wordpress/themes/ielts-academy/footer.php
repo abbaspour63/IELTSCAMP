@@ -8,7 +8,7 @@
             <div>
                 <a href="<?php echo esc_url( home_url( '/' ) ); ?>"
                    class="mb-4 inline-block text-2xl font-extrabold text-white">
-                    IELTSCAMPS
+                    IELTSCAMP
                 </a>
 
                 <p class="max-w-xs text-sm leading-7 text-slate-400">
@@ -89,7 +89,7 @@
         <div class="mt-10 border-t border-slate-800 pt-6 text-center text-sm text-slate-400">
             <p>
                 © <?php echo esc_html( wp_date( 'Y' ) ); ?>
-                IELTSCAMPS — تمامی حقوق محفوظ است.
+                IELTSCAMP — تمامی حقوق محفوظ است.
             </p>
         </div>
 

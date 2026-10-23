@@ -4,7 +4,7 @@
 <main class="min-h-screen bg-slate-100 px-6 py-16 text-center">
     <div class="mx-auto max-w-4xl">
         <h1 class="text-4xl font-bold text-blue-900">
-            IELTS Academy
+            IELTSCAMP
         </h1>
 
         <p class="mt-6 text-lg text-slate-700">

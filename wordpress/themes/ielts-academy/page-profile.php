@@ -121,7 +121,7 @@ get_header();
         <section class="mb-6 rounded-2xl bg-white p-6 shadow-sm">
 
             <p class="mb-2 text-sm text-slate-500">
-                پنل کاربری IELTS Academy
+                پنل کاربری IELTSCAMP
             </p>
 
             <h1 class="text-2xl font-bold text-slate-800">

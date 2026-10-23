@@ -208,3 +208,188 @@ function ielts_academy_handle_profile_update() {
     );
     exit;
 }
+
+
+/**
+ * IELTSCAMP: email verification.
+ */
+
+/**
+ * Send an email verification link to a newly registered user.
+ */
+function ielts_academy_send_verification_email( $user_id ) {
+    $user = get_userdata( $user_id );
+
+    if ( ! $user ) {
+        return false;
+    }
+
+    $token = bin2hex( random_bytes( 32 ) );
+
+    update_user_meta(
+        $user_id,
+        '_ielts_email_verified',
+        '0'
+    );
+
+    update_user_meta(
+        $user_id,
+        '_ielts_email_verification_token',
+        wp_hash( $token )
+    );
+
+    update_user_meta(
+        $user_id,
+        '_ielts_email_verification_expires',
+        time() + DAY_IN_SECONDS
+    );
+
+    $verification_url = add_query_arg(
+        [
+            'ielts_verify_email' => '1',
+            'uid'                => $user_id,
+            'token'              => $token,
+        ],
+        home_url( '/register/' )
+    );
+
+    $subject = 'تأیید ایمیل حساب IELTSCAMP';
+
+    $message = "سلام {$user->display_name}،\n\n";
+    $message .= "برای تأیید ایمیل و فعال‌سازی حساب خود، روی لینک زیر کلیک کنید:\n\n";
+    $message .= $verification_url . "\n\n";
+    $message .= "این لینک تا ۲۴ ساعت معتبر است.\n";
+    $message .= "اگر شما این حساب را ایجاد نکرده‌اید، این ایمیل را نادیده بگیرید.";
+
+    return wp_mail(
+        $user->user_email,
+        $subject,
+        $message
+    );
+}
+
+/**
+ * Verify the token and activate the account.
+ */
+add_action(
+    'template_redirect',
+    'ielts_academy_verify_email_request'
+);
+
+function ielts_academy_verify_email_request() {
+    if (
+        ! isset( $_GET['ielts_verify_email'] ) ||
+        '1' !== (string) wp_unslash( $_GET['ielts_verify_email'] )
+    ) {
+        return;
+    }
+
+    $user_id = isset( $_GET['uid'] )
+        ? absint( $_GET['uid'] )
+        : 0;
+
+    $token = isset( $_GET['token'] )
+        ? sanitize_text_field( wp_unslash( $_GET['token'] ) )
+        : '';
+
+    $user = $user_id ? get_userdata( $user_id ) : false;
+
+    $stored_token = $user
+        ? get_user_meta(
+            $user_id,
+            '_ielts_email_verification_token',
+            true
+        )
+        : '';
+
+    $expires = $user
+        ? (int) get_user_meta(
+            $user_id,
+            '_ielts_email_verification_expires',
+            true
+        )
+        : 0;
+
+    $valid = (
+        $user &&
+        '0' === get_user_meta(
+            $user_id,
+            '_ielts_email_verified',
+            true
+        ) &&
+        '' !== $token &&
+        '' !== $stored_token &&
+        time() <= $expires &&
+        hash_equals( $stored_token, wp_hash( $token ) )
+    );
+
+    if ( ! $valid ) {
+        wp_safe_redirect(
+            add_query_arg(
+                'email_verification',
+                'invalid',
+                home_url( '/register/' )
+            )
+        );
+        exit;
+    }
+
+    update_user_meta(
+        $user_id,
+        '_ielts_email_verified',
+        '1'
+    );
+
+    delete_user_meta(
+        $user_id,
+        '_ielts_email_verification_token'
+    );
+
+    delete_user_meta(
+        $user_id,
+        '_ielts_email_verification_expires'
+    );
+
+    wp_safe_redirect(
+        add_query_arg(
+            'email_verification',
+            'success',
+            home_url( '/login/' )
+        )
+    );
+    exit;
+}
+
+/**
+ * Block login for accounts awaiting email verification.
+ */
+add_filter(
+    'wp_authenticate_user',
+    'ielts_academy_block_unverified_email_login',
+    20,
+    2
+);
+
+function ielts_academy_block_unverified_email_login(
+    $user,
+    $password
+) {
+    if ( is_wp_error( $user ) ) {
+        return $user;
+    }
+
+    $verified = get_user_meta(
+        $user->ID,
+        '_ielts_email_verified',
+        true
+    );
+
+    if ( '0' === $verified ) {
+        return new WP_Error(
+            'ielts_email_not_verified',
+            'ابتدا ایمیل خود را تأیید کنید. لینک تأیید به ایمیل شما ارسال شده است.'
+        );
+    }
+
+    return $user;
+}

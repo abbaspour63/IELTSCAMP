@@ -157,9 +157,9 @@ require_once get_template_directory() . '/includes/auth.php';
 require_once get_template_directory() . '/includes/courses.php';
 require_once get_template_directory() . '/includes/consultations.php';
 require_once get_template_directory() . '/includes/course-sales.php';
-
+require_once get_template_directory().'/includes/events.php';
 /**
- * Load IELTS Academy login JavaScript.
+ * Load IELTSCAMP login JavaScript.
  */
 function ielts_academy_enqueue_login_script() {
     if ( ! is_page( 'login' ) ) {
@@ -217,7 +217,7 @@ add_filter( 'woocommerce_apply_tracking', '__return_false' );
 
 
 /**
- * تبدیل تاریخ میلادی به تاریخ شمسی برای وبلاگ IELTS Academy
+ * تبدیل تاریخ میلادی به تاریخ شمسی برای وبلاگ IELTSCAMP
  */
 function ielts_academy_jalali_date( $timestamp = null ) {
     if ( ! $timestamp ) {
@@ -310,3 +310,10 @@ function ielts_academy_woocommerce_support() {
     add_theme_support('woocommerce');
 }
 add_action('after_setup_theme', 'ielts_academy_woocommerce_support');
+add_filter( 'wp_mail_from', function ( $email ) {
+    return get_option( 'admin_email' );
+} );
+
+add_filter( 'wp_mail_from_name', function ( $name ) {
+    return 'IELTSCAMP';
+} );
