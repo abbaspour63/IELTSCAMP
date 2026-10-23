@@ -14,7 +14,9 @@ $skills = [
         'color'       => 'bg-sky-100',
         'accent'      => 'text-sky-700',
         'image' => 'listening.webp',
-        'href'        => home_url('/courses/'),
+        'slug'=> 'listening',
+         'href' => home_url('/courses/?skill=listening'),
+
     ],
     [
         'name'        => 'Reading',
@@ -24,7 +26,8 @@ $skills = [
         'color'       => 'bg-amber-100',
         'accent'      => 'text-amber-700',
         'image' => 'reading.webp',
-        'href'        => home_url('/courses/'),
+        'slug'=>'reading',
+        'href' => home_url('/courses/?skill=reading'),
     ],
     [
         'name'        => 'Writing',
@@ -34,7 +37,8 @@ $skills = [
         'color'       => 'bg-indigo-100',
         'accent'      => 'text-indigo-700',
         'image' => 'writing .webp',
-        'href'        => home_url('/courses/'),
+        'slug'=>'writing',
+        'href' => home_url('/courses/?skill=writing'),
     ],
     [
         'name'        => 'Speaking',
@@ -44,7 +48,8 @@ $skills = [
         'color'       => 'bg-rose-100',
         'accent'      => 'text-rose-700',
         'image' => 'speaking.webp',
-        'href'        => home_url('/courses/'),
+        'slug'=>'speaking',
+        'href' => home_url('/courses/?skill=speaking'),
     ],
 ];
 ?>
@@ -70,8 +75,11 @@ $skills = [
         </div>
 
         <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            
 
-            <?php foreach ($skills as $skill) : ?>
+             <?php foreach ($skills as $skill) :
+                 
+                 ?> 
                 <article
                     class="group relative flex min-h-72 flex-col overflow-hidden rounded-3xl border border-white bg-white p-6 shadow-[0_12px_35px_rgba(30,64,175,0.08)] transition duration-300 ease-out hover:-translate-y-2 hover:shadow-[0_22px_45px_rgba(30,64,175,0.16)] motion-reduce:transform-none motion-reduce:transition-none">
                     <div class="absolute -left-8 -top-8 h-28 w-28 rounded-full <?php echo esc_attr($skill['color']); ?> opacity-70 transition duration-500 group-hover:scale-125 motion-reduce:transform-none" aria-hidden="true"></div>

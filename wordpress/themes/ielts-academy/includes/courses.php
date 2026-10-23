@@ -9,7 +9,8 @@ if (!defined('ABSPATH')) {
  */
 add_action('init', 'ielts_academy_register_course_type');
 
-function ielts_academy_register_course_type() {
+function ielts_academy_register_course_type()
+{
 
     register_post_type('ielts_course', [
         'labels' => [
@@ -22,12 +23,16 @@ function ielts_academy_register_course_type() {
             'menu_name'     => 'دوره‌های IELTS',
         ],
 
-        // مدیریت دوره‌ها از پنل وردپرس انجام می‌شود.
-        'public'              => false,
+        'public'              => true,
+        'publicly_queryable'  => true,
         'show_ui'             => true,
         'show_in_menu'        => true,
-        'exclude_from_search' => true,
-        'show_in_rest'        => true,
+        'exclude_from_search' => false,
+        'has_archive'         => 'false',
+        'rewrite'             => [
+            'slug'       => 'courses',
+            'with_front' => false,
+        ],
 
         'supports' => [
             'title',
@@ -44,24 +49,35 @@ function ielts_academy_register_course_type() {
  */
 add_action('init', 'ielts_academy_register_course_category');
 
-function ielts_academy_register_course_category() {
-    register_taxonomy('ielts_course_category', ['ielts_course'], [
-        'labels' => [
-            'name'          => 'دسته‌بندی دوره‌ها',
-            'singular_name' => 'دسته دوره',
-            'search_items'  => 'جستجوی دسته‌ها',
-            'all_items'     => 'همه دسته‌ها',
-            'edit_item'     => 'ویرایش دسته',
-            'add_new_item'  => 'افزودن دسته جدید',
-            'menu_name'     => 'دسته‌بندی دوره‌ها',
-        ],
-        'public'            => false,
-        'show_ui'           => true,
-        'show_admin_column' => true,
-        'show_in_rest'      => true,
-        'hierarchical'      => true,
-        'rewrite'           => false,
-    ]);
+function ielts_academy_register_course_category()
+{
+    
+        
+register_taxonomy('ielts_course_category', ['ielts_course'], [
+    'labels' => [
+        'name'              => 'دسته‌بندی دوره‌ها',
+        'singular_name'     => 'دسته دوره',
+        'search_items'      => 'جستجوی دسته‌ها',
+        'all_items'         => 'همه دسته‌ها',
+        'edit_item'         => 'ویرایش دسته',
+        'add_new_item'      => 'افزودن دسته جدید',
+        'menu_name'         => 'دسته‌بندی دوره‌ها',
+    ],
+
+    'hierarchical'       => true,
+    'public'             => true,
+    'publicly_queryable' => true,
+    'show_ui'            => true,
+    'show_admin_column'  => true,
+    'show_in_rest'       => true,
+
+    'rewrite' => [
+        'slug'       => 'course-category',
+        'with_front' => false,
+    ],
+]);
+
+
 }
 /**
  * نمایش فهرست دوره‌ها در صفحه ویرایش کاربر وردپرس
@@ -76,7 +92,8 @@ add_action(
     'ielts_academy_render_user_courses'
 );
 
-function ielts_academy_render_user_courses($user) {
+function ielts_academy_render_user_courses($user)
+{
 
     // اختصاص دوره‌ها فقط توسط مدیر سایت
     if (!current_user_can('manage_options')) {
@@ -107,7 +124,7 @@ function ielts_academy_render_user_courses($user) {
         'ielts_academy_save_user_courses',
         'ielts_academy_user_courses_nonce'
     );
-    ?>
+?>
 
     <h2>دوره‌های IELTS این کاربر</h2>
 
@@ -140,8 +157,7 @@ function ielts_academy_render_user_courses($user) {
                                         true
                                     )
                                 );
-                                ?>
-                            >
+                                ?>>
 
                             <?php echo esc_html(get_the_title($course)); ?>
 
@@ -158,7 +174,7 @@ function ielts_academy_render_user_courses($user) {
         </tr>
     </table>
 
-    <?php
+<?php
 }
 
 
@@ -175,7 +191,8 @@ add_action(
     'ielts_academy_save_user_courses'
 );
 
-function ielts_academy_save_user_courses($user_id) {
+function ielts_academy_save_user_courses($user_id)
+{
 
     if (!current_user_can('manage_options')) {
         return;

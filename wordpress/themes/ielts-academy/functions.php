@@ -303,3 +303,10 @@ function ielts_academy_jalali_date( $timestamp = null ) {
 
     return sprintf( '%d %s %d', $jd, $months[ $jm ], $jy );
 }
+/**
+ * پشتیبانی قالب از WooCommerce
+ */
+function ielts_academy_woocommerce_support() {
+    add_theme_support('woocommerce');
+}
+add_action('after_setup_theme', 'ielts_academy_woocommerce_support');

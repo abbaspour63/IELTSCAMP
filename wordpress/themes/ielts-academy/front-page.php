@@ -128,19 +128,19 @@ get_header();
 
 
     <!-- Call to action -->
-    <section class="bg-blue-950 px-6 py-16 text-center text-white">
+    <section class="bg-blue-100 px-6 py-16 text-center text-white">
         <div class="mx-auto max-w-3xl">
             <h2 class="text-3xl font-extrabold">
                 مسیر یادگیری خودت را شروع کن
             </h2>
 
             <p class="mt-4 leading-8 text-blue-100">
-                برای دسترسی به امکانات آموزشی، وارد حساب کاربری خود شو.
+               برگزاری رویداد 
             </p>
 
             <a href="<?php echo esc_url( home_url( '/my-account/' ) ); ?>"
                class="mt-8 inline-block rounded-xl bg-cyan-400 px-7 py-3 font-bold text-blue-950 transition hover:bg-cyan-300">
-                ورود به آکادمی
+              ورود به ایونت 
             </a>
         </div>
     </section>
