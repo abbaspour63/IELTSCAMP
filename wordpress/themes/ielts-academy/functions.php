@@ -317,3 +317,9 @@ add_filter( 'wp_mail_from', function ( $email ) {
 add_filter( 'wp_mail_from_name', function ( $name ) {
     return 'IELTSCAMP';
 } );
+
+add_action( 'wp_mail_failed', function ( $error ) {
+    error_log(
+        '[IELTS CAMP mail error] ' . $error->get_error_message()
+    );
+} );
