@@ -1,0 +1,5 @@
+
+---
+deployment:
+  tasks:
+    - /bin/cp -R wordpress/themes/ielts-academy/. /home/ieltscam/public_html/wp-content/themes/ielts-academy/
