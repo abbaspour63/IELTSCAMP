@@ -320,6 +320,14 @@ add_filter( 'wp_mail_from_name', function ( $name ) {
 
 add_action( 'wp_mail_failed', function ( $error ) {
     error_log(
-        '[IELTS CAMP mail error] ' . $error->get_error_message()
+        '[IELTSCAMP mail error] ' . $error->get_error_message()
     );
+} );
+
+add_filter( 'wp_mail_from', function ( $email ) {
+    return 'ieltscam@ieltscamp.ir';
+} );
+
+add_filter( 'wp_mail_from_name', function ( $name ) {
+    return 'IELTSCAMP';
 } );
