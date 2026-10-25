@@ -343,11 +343,26 @@ add_action( 'wp_mail_failed', function ( $error ) {
 /**
  * Configure WordPress SMTP using environment variables.
  */
+ define( 'IELTS_SMTP_HOST', 'mail.ieltscamp.ir' );
+define( 'IELTS_SMTP_PORT', 465 );
+define( 'IELTS_SMTP_USERNAME', 'info@ieltscamp.ir' );
+define( 'IELTS_SMTP_PASSWORD','toolkit@1363' );
 add_action( 'phpmailer_init', function ( $phpmailer ) {
-    $host     = getenv( 'SMTP_HOST' );
-    $port     = getenv( 'SMTP_PORT' );
-    $username = getenv( 'SMTP_USERNAME' );
-    $password = getenv( 'SMTP_PASSWORD' );
+   $host = defined( 'IELTS_SMTP_HOST' )
+    ? IELTS_SMTP_HOST
+    : getenv( 'SMTP_HOST' );
+
+$port = defined( 'IELTS_SMTP_PORT' )
+    ? IELTS_SMTP_PORT
+    : getenv( 'SMTP_PORT' );
+
+$username = defined( 'IELTS_SMTP_USERNAME' )
+    ? IELTS_SMTP_USERNAME
+    : getenv( 'SMTP_USERNAME' );
+
+$password = defined( 'IELTS_SMTP_PASSWORD' )
+    ? IELTS_SMTP_PASSWORD
+    : getenv( 'SMTP_PASSWORD' );
 
     if ( ! $host || ! $port || ! $username || ! $password ) {
         error_log( '[IELTSCAMP SMTP] SMTP configuration is incomplete.' );
