@@ -250,7 +250,7 @@ function ielts_academy_send_verification_email( $user_id ) {
             'uid'                => $user_id,
             'token'              => $token,
         ],
-        home_url( '/register/' )
+        home_url( '/profile/' )
     );
 
     $subject = 'تأیید ایمیل حساب IELTSCAMP';
@@ -324,7 +324,15 @@ function ielts_academy_verify_email_request() {
     );
 
     if ( ! $valid ) {
-    
+        wp_safe_redirect(
+            add_query_arg(
+                'email_verification',
+                'invalid',
+                home_url( '/register/' )
+            )
+        );
+        exit;
+    }
 
     update_user_meta(
         $user_id,
