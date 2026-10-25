@@ -327,7 +327,7 @@ add_action('after_setup_theme', 'ielts_academy_woocommerce_support');
 // } );
 
 add_filter( 'wp_mail_from', function ( $email ) {
-    return 'ieltscam@ieltscamp.ir';
+    return 'info@ieltscamp.ir';
 } );
 
 add_filter( 'wp_mail_from_name', function ( $name ) {
@@ -338,4 +338,30 @@ add_action( 'wp_mail_failed', function ( $error ) {
     error_log(
         '[IELTSCAMP mail error] ' . $error->get_error_message()
     );
+} );
+
+/**
+ * Configure WordPress SMTP using environment variables.
+ */
+add_action( 'phpmailer_init', function ( $phpmailer ) {
+    $host     = getenv( 'SMTP_HOST' );
+    $port     = getenv( 'SMTP_PORT' );
+    $username = getenv( 'SMTP_USERNAME' );
+    $password = getenv( 'SMTP_PASSWORD' );
+
+    if ( ! $host || ! $port || ! $username || ! $password ) {
+        error_log( '[IELTSCAMP SMTP] SMTP configuration is incomplete.' );
+        return;
+    }
+
+    $phpmailer->isSMTP();
+    $phpmailer->Host       = $host;
+    $phpmailer->SMTPAuth   = true;
+    $phpmailer->Port       = (int) $port;
+    $phpmailer->SMTPSecure = 'ssl';
+    $phpmailer->Username   = $username;
+    $phpmailer->Password   = $password;
+    $phpmailer->From       = 'info@ieltscamp.ir';
+    $phpmailer->FromName   = 'IELTSCAMP';
+    $phpmailer->Sender     = 'info@ieltscamp.ir';
 } );
