@@ -250,7 +250,7 @@ function ielts_academy_send_verification_email( $user_id ) {
             'uid'                => $user_id,
             'token'              => $token,
         ],
-        home_url( '/profile/' )
+        home_url( '/register/' )
     );
 
     $subject = 'تأیید ایمیل حساب IELTSCAMP';
@@ -324,15 +324,22 @@ function ielts_academy_verify_email_request() {
     );
 
     if ( ! $valid ) {
-        wp_safe_redirect(
-            add_query_arg(
-                'email_verification',
-                'invalid',
-                home_url( '/register/' )
-            )
-        );
-        exit;
-    }
+    
+    // ورود خودکار کاربر پس از تأیید موفق ایمیل
+    wp_set_current_user( $user_id );
+    wp_set_auth_cookie( $user_id, true, is_ssl() );
+    do_action( 'wp_login', $user->user_login, $user );
+
+    // انتقال به پروفایل
+    wp_safe_redirect(
+        add_query_arg(
+            'email_verification',
+            'success',
+            home_url( '/profile/' )
+        )
+    );
+    exit;
+
 
     update_user_meta(
         $user_id,
@@ -354,7 +361,7 @@ function ielts_academy_verify_email_request() {
         add_query_arg(
             'email_verification',
             'success',
-            home_url( '/login/' )
+            home_url( '/profile/' )
         )
     );
     exit;
@@ -392,4 +399,5 @@ function ielts_academy_block_unverified_email_login(
     }
 
     return $user;
+}
 }
