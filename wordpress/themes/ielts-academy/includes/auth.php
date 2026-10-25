@@ -277,56 +277,80 @@ add_action(
 );
 
 function ielts_academy_verify_email_request() {
+    if (
+        ! isset( $_GET['ielts_verify_email'] ) ||
+        '1' !== (string) wp_unslash( $_GET['ielts_verify_email'] )
+    ) {
+        return;
+    }
 
-if ( ! $valid ) {
+    $user_id = isset( $_GET['uid'] )
+        ? absint( $_GET['uid'] )
+        : 0;
+
+    $token = isset( $_GET['token'] )
+        ? sanitize_text_field( wp_unslash( $_GET['token'] ) )
+        : '';
+
+    $user = $user_id ? get_userdata( $user_id ) : false;
+
+    $stored_token = $user
+        ? get_user_meta(
+            $user_id,
+            '_ielts_email_verification_token',
+            true
+        )
+        : '';
+
+    $expires = $user
+        ? (int) get_user_meta(
+            $user_id,
+            '_ielts_email_verification_expires',
+            true
+        )
+        : 0;
+
+    $valid = (
+        $user &&
+        '0' === get_user_meta(
+            $user_id,
+            '_ielts_email_verified',
+            true
+        ) &&
+        '' !== $token &&
+        '' !== $stored_token &&
+        time() <= $expires &&
+        hash_equals( $stored_token, wp_hash( $token ) )
+    );
+
+    if ( ! $valid ) {
+    
+
+    update_user_meta(
+        $user_id,
+        '_ielts_email_verified',
+        '1'
+    );
+
+    delete_user_meta(
+        $user_id,
+        '_ielts_email_verification_token'
+    );
+
+    delete_user_meta(
+        $user_id,
+        '_ielts_email_verification_expires'
+    );
+
     wp_safe_redirect(
         add_query_arg(
             'email_verification',
-            'invalid',
-            home_url( '/register/' )
+            'success',
+            home_url( '/profile/' )
         )
     );
     exit;
 }
-
-// ثبت تأیید ایمیل
-update_user_meta(
-    $user_id,
-    '_ielts_email_verified',
-    '1'
-);
-
-// حذف توکن و زمان انقضا پس از تأیید موفق
-delete_user_meta(
-    $user_id,
-    '_ielts_email_verification_token'
-);
-
-delete_user_meta(
-    $user_id,
-    '_ielts_email_verification_expires'
-);
-
-// ورود خودکار کاربر
-wp_set_current_user( $user_id );
-wp_set_auth_cookie( $user_id, true, is_ssl() );
-do_action( 'wp_login', $user->user_login, $user );
-
-// انتقال به پروفایل
-wp_safe_redirect(
-    add_query_arg(
-        'email_verification',
-        'success',
-        home_url( '/profile/' )
-    )
-);
-exit;
-}
-
-
-
-
-
 
 /**
  * Block login for accounts awaiting email verification.
@@ -360,5 +384,4 @@ function ielts_academy_block_unverified_email_login(
     }
 
     return $user;
-}
 }
