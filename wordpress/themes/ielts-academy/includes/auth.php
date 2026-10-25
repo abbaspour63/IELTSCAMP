@@ -339,6 +339,17 @@ function ielts_academy_verify_email_request() {
         hash_equals( $stored_token, wp_hash( $token ) )
     );
 
+    // if ( ! $valid ) {
+    //     wp_safe_redirect(
+    //         add_query_arg(
+    //             'email_verification',
+    //             'invalid',
+    //             home_url( '/register/' )
+    //         )
+    //     );
+    //     exit;
+    // }
+
     if ( ! $valid ) {
         wp_safe_redirect(
             add_query_arg(
@@ -350,6 +361,42 @@ function ielts_academy_verify_email_request() {
         exit;
     }
 
+    // ثبت تأیید ایمیل
+    update_user_meta(
+        $user_id,
+        '_ielts_email_verified',
+        '1'
+    );
+
+    // حذف توکن یک‌بارمصرف
+    delete_user_meta(
+        $user_id,
+        '_ielts_email_verification_token'
+    );
+
+    delete_user_meta(
+        $user_id,
+        '_ielts_email_verification_expires'
+    );
+
+    // ورود خودکار کاربر پس از تأیید موفق
+    wp_set_current_user( $user_id );
+    wp_set_auth_cookie( $user_id, true, is_ssl() );
+
+    do_action( 'wp_login', $user->user_login, $user );
+
+    // انتقال به پنل کاربری
+    wp_safe_redirect(
+        add_query_arg(
+            'email_verification',
+            'success',
+            home_url( '/profile/' )
+        )
+    );
+    exit;
+}
+
+
     update_user_meta(
         $user_id,
         '_ielts_email_verified',
@@ -360,6 +407,8 @@ function ielts_academy_verify_email_request() {
         $user_id,
         '_ielts_email_verification_token'
     );
+
+
 
     delete_user_meta(
         $user_id,
