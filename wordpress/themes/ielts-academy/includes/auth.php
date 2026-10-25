@@ -93,14 +93,30 @@ function ielts_academy_handle_email_login() {
         ielts_academy_email_login_error();
     }
 
+    // $result = wp_signon(
+    //     [
+    //         'user_login'    => $user->user_login,
+    //         'user_password' => $password,
+    //         'remember'      => true,
+    //     ],
+    //     is_ssl()
+    // );
     $result = wp_signon(
-        [
-            'user_login'    => $user->user_login,
-            'user_password' => $password,
-            'remember'      => true,
-        ],
-        is_ssl()
-    );
+    [
+        'user_login'    => $user->user_login,
+        'user_password' => $password,
+        'remember'      => true,
+    ],
+    is_ssl()
+);
+
+if ( is_wp_error( $result ) ) {
+    ielts_academy_email_login_error();
+    return;
+}
+
+wp_safe_redirect( home_url( '/profile/' ) );
+exit;
 
     if ( is_wp_error( $result ) ) {
         ielts_academy_email_login_error();
@@ -354,7 +370,7 @@ function ielts_academy_verify_email_request() {
         add_query_arg(
             'email_verification',
             'success',
-            home_url( '/login/' )
+            home_url( '/profile/' )
         )
     );
     exit;
