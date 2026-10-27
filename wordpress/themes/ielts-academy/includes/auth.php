@@ -342,13 +342,12 @@ function ielts_academy_verify_email_request() {
 
     delete_user_meta(
         $user_id,
-        '_ielts_email_verification_token'
-    );
-
-    delete_user_meta(
-        $user_id,
         '_ielts_email_verification_expires'
     );
+
+    // ورود خودکار کاربر پس از تأیید موفق ایمیل.
+    wp_set_current_user( $user_id );
+    wp_set_auth_cookie( $user_id, true, is_ssl() );
 
     wp_safe_redirect(
         add_query_arg(
@@ -358,6 +357,8 @@ function ielts_academy_verify_email_request() {
         )
     );
     exit;
+
+ 
 }
 
 /**
