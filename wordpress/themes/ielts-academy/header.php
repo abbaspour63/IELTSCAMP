@@ -37,13 +37,37 @@
     <?php endif; ?>
 
 </a>
-
+<button
+    id="mobile-menu-toggle"
+    type="button"
+    class="inline-flex items-center justify-center rounded-lg border border-slate-200 p-2 text-slate-700 hover:bg-slate-100 md:hidden"
+    aria-controls="site-navigation"
+    aria-expanded="false"
+    aria-label="باز کردن منو"
+>
+    <svg
+        id="mobile-menu-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+        aria-hidden="true"
+    >
+        <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M4 6h16M4 12h16M4 18h16"
+        />
+    </svg>
+</button>
        
 
         <?php if ( is_user_logged_in() ) : ?>
 
-            <div class="flex items-center gap-3">
-                <a href="<?php echo esc_url(home_url('/prof`ile/')); ?>"
+            <div class="hidden items-center gap-3 md:flex">
+                <a href="<?php echo esc_url(home_url('/profile/')); ?>"
                    class="rounded-xl bg-blue-700 px-5 py-3 font-bold text-white transition hover:bg-blue-800">
                     پروفایل من
                 </a>
@@ -57,7 +81,7 @@
         <?php else : ?>
 
             <a href="<?php echo esc_url(home_url('/login/')); ?>"
-               class="rounded-xl bg-blue-700 px-5 py-3 font-bold text-white transition hover:bg-blue-800">
+               class="hidden rounded-xl bg-blue-700 px-5 py-3 font-bold text-white transition hover:bg-blue-800 md:inline-flex">
                 ورود و ثبت نام
             </a>
 
@@ -77,7 +101,7 @@
     </nav> -->
 
 
-<nav class="border-t border-slate-100">
+<!-- <nav class="border-t border-slate-100">
     <div class="mx-auto flex max-w-7xl justify-center px-6 py-3">
 
         <div class="flex flex-wrap items-center justify-center gap-8 text-sm font-medium text-slate-700">
@@ -109,6 +133,108 @@
 
         </div>
     </div>
+</nav> -->
+
+<nav id="site-navigation" class="hidden border-t border-slate-100 md:block">
+    <div class="mx-auto max-w-7xl px-4 py-3 md:px-6">
+        <div class="flex flex-col gap-1 text-right text-sm font-medium text-slate-700 md:flex-row md:items-center md:justify-center md:gap-8">
+
+            <a href="<?php echo esc_url(home_url('/')); ?>"
+               class="rounded-lg px-3 py-3 transition hover:bg-slate-50 hover:text-blue-700 md:px-0 md:py-1 md:hover:bg-transparent">
+                صفحه اصلی
+            </a>
+
+            <a href="<?php echo esc_url(home_url('/courses/')); ?>"
+               class="rounded-lg px-3 py-3 transition hover:bg-slate-50 hover:text-blue-700 md:px-0 md:py-1 md:hover:bg-transparent">
+                دوره‌ها
+            </a>
+
+            <a href="<?php echo esc_url(home_url('/blog/')); ?>"
+               class="rounded-lg px-3 py-3 transition hover:bg-slate-50 hover:text-blue-700 md:px-0 md:py-1 md:hover:bg-transparent">
+                مقالات
+            </a>
+
+            <a href="<?php echo esc_url(home_url('/about/')); ?>"
+               class="rounded-lg px-3 py-3 transition hover:bg-slate-50 hover:text-blue-700 md:px-0 md:py-1 md:hover:bg-transparent">
+                درباره ما
+            </a>
+
+            <a href="<?php echo esc_url(home_url('/contact/')); ?>"
+               class="rounded-lg px-3 py-3 transition hover:bg-slate-50 hover:text-blue-700 md:px-0 md:py-1 md:hover:bg-transparent">
+                تماس با ما
+            </a>
+
+            <div class="mt-2 border-t border-slate-100 pt-3 md:hidden">
+                <?php if (is_user_logged_in()) : ?>
+
+                    <a href="<?php echo esc_url(home_url('/profile/')); ?>"
+                       class="block rounded-lg px-3 py-3 font-bold text-blue-700 hover:bg-slate-50">
+                        پروفایل من
+                    </a>
+
+                    <a href="<?php echo esc_url(wp_logout_url(home_url('/login/'))); ?>"
+                       class="block rounded-lg px-3 py-3 font-bold text-slate-700 hover:bg-slate-50">
+                        خروج
+                    </a>
+
+                <?php else : ?>
+
+                    <a href="<?php echo esc_url(home_url('/login/')); ?>"
+                       class="block rounded-lg bg-blue-700 px-4 py-3 text-center font-bold text-white hover:bg-blue-800">
+                        ورود و ثبت نام
+                    </a>
+
+                <?php endif; ?>
+            </div>
+
+        </div>
+    </div>
 </nav>
 
+
 </header>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const toggle = document.getElementById('mobile-menu-toggle');
+    const menu = document.getElementById('site-navigation');
+    const icon = document.getElementById('mobile-menu-icon');
+
+    if (!toggle || !menu || !icon) {
+        return;
+    }
+
+    function closeMenu() {
+        menu.classList.add('hidden');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'باز کردن منو');
+
+        icon.innerHTML =
+            '<path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />';
+    }
+
+    toggle.addEventListener('click', function () {
+        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+
+        if (isOpen) {
+            closeMenu();
+        } else {
+            menu.classList.remove('hidden');
+            toggle.setAttribute('aria-expanded', 'true');
+            toggle.setAttribute('aria-label', 'بستن منو');
+
+            icon.innerHTML =
+                '<path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18" />';
+        }
+    });
+
+    menu.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', closeMenu);
+    });
+
+    window.addEventListener('resize', function () {
+        if (window.innerWidth >= 768) {
+            closeMenu();
+        }
+    });
+});
+</script>

@@ -46,7 +46,7 @@ if (
 
         $password = isset( $_POST['password'] )
             ? (string) wp_unslash( $_POST['password'] )
-            : '';
+                : '';
 
         $password_confirm = isset( $_POST['password_confirm'] )
             ? (string) wp_unslash( $_POST['password_confirm'] )

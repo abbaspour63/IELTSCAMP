@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     <div class="relative mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-2 lg:gap-16">
 
         <div class="relative z-10 text-right">
-            <span class="inline-flex items-center gap-2 rounded-full border border-[#B2BD7E] bg-white/80 px-4 py-2 text-sm font-bold text-[#46533C] shadow-sm">
+            <span class="inline-flex items-center gap-2 rounded-full border border-[#B2BD7E] bg-white/80 px-4 py-2 text-sm font-extrabold text-[#46533C] shadow-sm">
                 <span class="h-2 w-2 rounded-full bg-[#6A795D]"></span>
                 مسیر حرفه‌ای آمادگی آیلتس
             </span>

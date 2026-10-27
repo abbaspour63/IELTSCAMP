@@ -74,10 +74,12 @@ body.home #hero h1,
 body.home #hero h2,
 body.home #hero h3 {
   color: var(--luxury-silver) !important;
+  
 }
 
 body.home #hero p {
   color: var(--luxury-muted) !important;
+  font-weight: 500;
 }
 
 /* Main sections */
@@ -273,4 +275,35 @@ body.home main article:hover {
 .ielts-events-pagination {
     margin-top: 40px;
     text-align: center;
+}
+
+/* Vazirmatn font — Hero section only */
+#ielts-hero {
+  font-family: "Vazirmatn", sans-serif;
+}
+
+#ielts-hero h1 {
+  font-weight: 800;
+}
+
+#ielts-hero p {
+  font-weight: 500;
+}
+
+#ielts-hero a {
+  font-weight: 700;
+}
+
+#ielts-hero > div > div:first-child > span {
+  font-weight: 800;
+}
+/* Four skills section — Vazirmatn only */
+#ielts-skills h2 {
+  font-family: "Vazirmatn", sans-serif;
+  font-weight: 800;
+}
+
+#ielts-skills p {
+  font-family: "Vazirmatn", sans-serif;
+  font-weight: 400;
 }
