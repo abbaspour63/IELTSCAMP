@@ -119,11 +119,7 @@ if (isset($payment_messages[$payment_result])) :
     1
 );
 
-add_action(
-    'template_redirect',
-    'ieltscamp_process_event_registration',
-    1
-);
+
 
 function ieltscamp_process_event_registration() {
 
@@ -333,9 +329,21 @@ function ieltscamp_process_event_registration() {
     }
 }
 
-   
+   add_action(
+    'template_redirect',
+    'ieltscamp_handle_zarinpal_callback',
+    2
+);
 
 function ieltscamp_handle_zarinpal_callback() {
+    error_log(
+    'IELTSCAMP ZarinPal callback reached: ' .
+    wp_json_encode([
+        'callback' => $_GET['ieltscamp_zarinpal_callback'] ?? null,
+        'status'   => $_GET['Status'] ?? null,
+        'has_authority' => isset($_GET['Authority']),
+    ])
+);
 
     if (
         ! isset($_GET['ieltscamp_zarinpal_callback']) ||
