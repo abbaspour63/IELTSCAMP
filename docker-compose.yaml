@@ -14,6 +14,9 @@ services:
       SMTP_PORT: ${SMTP_PORT}
       SMTP_USERNAME: ${SMTP_USERNAME}
       SMTP_PASSWORD: ${SMTP_PASSWORD}
+      ZARINPAL_SANDBOX: "true"
+      ZARINPAL_MERCHANT_ID: ${ZARINPAL_MERCHANT_ID}
+      ZARINPAL_CALLBACK_URL: ${ZARINPAL_CALLBACK_URL}
     volumes:
       - wp_data:/var/www/html
       - ./wordpress/themes:/var/www/html/wp-content/themes

@@ -1,4 +1,3 @@
-
 <?php
 
 if (! defined('ABSPATH')) {
@@ -161,20 +160,21 @@ get_header();
 
                         <div class="mt-7">
 
-                            <?php if ($registration_url) : ?>
+                            <!-- <?php if ($registration_url) : ?>
 
                                 <a
                                     href="<?php echo esc_url($registration_url); ?>"
-                                    class="block rounded-xl bg-sky-600 px-5 py-3 text-center font-bold text-white transition hover:bg-sky-700"
+                                    class="block rounded-xl bg-sky-600 px-5 py-3 text-center  font-bold  text-white transition hover:bg-sky-700"
                                 >
                                     ثبت‌نام در رویداد
                                 </a>
 
-                            <?php else : ?>
+                            <?php else : ?> -->
+                             <?php ieltscamp_render_event_registration_form($event_id); ?>
 
-                                <p class="rounded-xl bg-white p-4 text-center text-sm leading-7 text-slate-600 ring-1 ring-slate-200">
+                                <!-- <p class="rounded-xl bg-white p-4 text-center text-sm leading-7 text-slate-600 ring-1 ring-slate-200">
                                     اطلاعات ثبت‌نام به‌زودی اعلام می‌شود.
-                                </p>
+                                </p> -->
 
                             <?php endif; ?>
 

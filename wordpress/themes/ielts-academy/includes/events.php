@@ -95,6 +95,11 @@ function ielts_academy_render_event_details_metabox($post) {
         '_ielts_event_registration_url',
         true
     );
+    $price = get_post_meta(
+    $post->ID,
+    '_ielts_event_price',
+    true
+);
     ?>
 
     <p>
@@ -143,7 +148,26 @@ function ielts_academy_render_event_details_metabox($post) {
             placeholder="آدرس محل برگزاری"
         >
     </p>
-
+     <p>
+    <label for="ielts_event_price">
+        <strong>هزینه ثبت‌نام (تومان)</strong>
+    </label>
+    <br>
+    <input
+        type="number"
+        id="ielts_event_price"
+        name="ielts_event_price"
+        value="<?php echo esc_attr($price); ?>"
+        min="0"
+        step="1"
+        class="regular-text"
+        placeholder="مثلاً 250000"
+    >
+    <br>
+    <span class="description">
+        مبلغ را به تومان وارد کنید. برای رویداد رایگان، عدد صفر وارد کنید.
+    </span>
+</p>
     <p>
         <label for="ielts_event_registration_url">
             <strong>لینک ثبت‌نام</strong>
@@ -212,6 +236,22 @@ function ielts_academy_save_event_details($post_id) {
 
         update_post_meta($post_id, $meta_key, $value);
     }
+    if (isset($_POST['ielts_event_price'])) {
+    $price = sanitize_text_field(
+        wp_unslash($_POST['ielts_event_price'])
+    );
+
+    if (
+        $price !== '' &&
+        ctype_digit($price)
+    ) {
+        update_post_meta(
+            $post_id,
+            '_ielts_event_price',
+            (string) absint($price)
+        );
+    }
+}
 
     if (isset($_POST['ielts_event_registration_url'])) {
         $url = esc_url_raw(
