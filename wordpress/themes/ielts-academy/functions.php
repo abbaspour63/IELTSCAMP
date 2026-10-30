@@ -159,6 +159,8 @@ require_once get_template_directory() . '/includes/consultations.php';
 require_once get_template_directory() . '/includes/course-sales.php';
 require_once get_template_directory().'/includes/events.php';
 require_once get_template_directory() . '/includes/event-payments.php';
+require_once get_template_directory() .'/includes/event-attendees.php';
+
 /**
  * Load IELTSCAMP login JavaScript.
  */

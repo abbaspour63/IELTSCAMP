@@ -17,6 +17,7 @@ services:
       ZARINPAL_SANDBOX: "true"
       ZARINPAL_MERCHANT_ID: ${ZARINPAL_MERCHANT_ID}
       ZARINPAL_CALLBACK_URL: ${ZARINPAL_CALLBACK_URL}
+      WORDPRESS_DEBUG: "1"
     volumes:
       - wp_data:/var/www/html
       - ./wordpress/themes:/var/www/html/wp-content/themes
